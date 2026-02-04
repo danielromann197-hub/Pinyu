@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Pinyu - Explora nuestros Pines</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Fonts: Quicksand -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Sticky Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span>✨</span> Pinyu
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="tienda.html" class="nav-link active">Tienda</a>
+                <a href="sobre.html" class="nav-link">Sobre Pinyu</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </div>
+            <div class="cart-icon">
+                🛒 <span style="font-size: 0.8rem; vertical-align: top;">(0)</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Header -->
+    <header style="text-align: center; padding: 3rem 0; background: var(--soft-pink);">
+        <h1 style="color: white; font-size: 2.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">Nuestra Colección 💖</h1>
+        <p style="color: white; font-size: 1.2rem; max-width: 600px; margin: 1rem auto;">Todos nuestros pines están
+            hechos con amor y estilo kawaii. Elige tus favoritos y agrégales un toque adorable a tu mundo.</p>
+        <p style="color: white; font-size: 1rem; opacity: 0.9;">✨ Modelos aleatorios. Tamaño aprox. 3 cm. ¡Colecciónalos
+            todos!</p>
+    </header>
+
+    <!-- Main Shop Section -->
+    <section class="products">
+        <div class="container">
+
+            <!-- Filters -->
+            <div class="filters">
+                <button class="filter-btn active">Todos</button>
+                <button class="filter-btn">🐱 Gatitos</button>
+                <button class="filter-btn">🎥 Anime</button>
+                <button class="filter-btn">🍊 Capibaras</button>
+                <button class="filter-btn">🦦 Otros</button>
+            </div>
+
+            <div class="product-grid">
+
+                <!-- Product: Capybara (NEW) -->
+                <div class="product-card">
+                    <span class="badge new">¡Nuevo!</span>
+                    <img src="assets/pin-capybara.png" alt="Pin Capibara Yuzu" class="product-img">
+                    <div class="product-info">
+                        <h3>Capibara Yuzu 🍊</h3>
+                        <span class="price">$140.00</span>
+                        <div class="state-container">
+                            <span style="font-size: 0.9rem; color: #2ecc71;">● En Stock</span>
+                        </div>
+                        <a href="producto.html" class="btn btn-primary btn-sm"
+                            style="width: 100%; margin-top: 1rem; text-align: center;">Ver detalles</a>
+                    </div>
+                </div>
+
+                <!-- Product: Cat Pizza -->
+                <div class="product-card">
+                    <img src="assets/pin-cat.png" alt="Pin Gato Pizza" class="product-img">
+                    <div class="product-info">
+                        <h3>Gato Pizza 🍕</h3>
+                        <span class="price">$120.00</span>
+                        <div><span style="font-size: 0.9rem; color: #2ecc71;">● En Stock</span></div>
+                        <a href="producto.html" class="btn btn-primary btn-sm"
+                            style="width: 100%; margin-top: 1rem; text-align: center;">Ver detalles</a>
+                    </div>
+                </div>
+
+                <!-- Product: Magic Wand -->
+                <div class="product-card">
+                    <img src="assets/pin-wand.png" alt="Pin Vara Mágica" class="product-img">
+                    <div class="product-info">
+                        <h3>Vara Mágica ✨</h3>
+                        <span class="price">$150.00</span>
+                        <div><span style="font-size: 0.9rem; color: #2ecc71;">● En Stock</span></div>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; margin-top: 1rem;">Agregar al
+                            carrito</button>
+                    </div>
+                </div>
+
+                <!-- Product: Ghost Boba -->
+                <div class="product-card">
+                    <span class="badge out-of-stock">Agotado</span>
+                    <img src="assets/pin-ghost.png" alt="Pin Fantasma Boba" class="product-img" style="opacity: 0.7;">
+                    <div class="product-info">
+                        <h3>Fantasma Boba 🧋</h3>
+                        <span class="price">$130.00</span>
+                        <div><span style="font-size: 0.9rem; color: #999;">● Agotado</span></div>
+                        <button class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 1rem;" disabled>Ver
+                            detalles</button>
+                    </div>
+                </div>
+
+                <!-- Product: Axolotl -->
+                <div class="product-card">
+                    <img src="assets/pin-axolotl.png" alt="Pin Axolote Feliz" class="product-img">
+                    <div class="product-info">
+                        <h3>Axolote Feliz 🌸</h3>
+                        <span class="price">$140.00</span>
+                        <div><span style="font-size: 0.9rem; color: #2ecc71;">● En Stock</span></div>
+                        <button class="btn btn-primary btn-sm" style="width: 100%; margin-top: 1rem;">Agregar al
+                            carrito</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--text-dark); color: white; padding: 4rem 0; margin-top: 4rem;">
+        <div class="container"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: left;">
+            <div>
+                <h3 style="color: var(--primary-pink); margin-bottom: 1rem;">Pinyu 💖</h3>
+                <p>Tu estilo, tu mood, un pin a la vez.</p>
+                <div style="margin-top: 1rem; font-size: 1.5rem;">
+                    <a href="#" style="margin-right: 10px;">📸</a>
+                    <a href="#" style="margin-right: 10px;">🎵</a>
+                    <a href="#">💬</a>
+                </div>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 1rem;">Políticas</h4>
+                <ul style="list-style: none; opacity: 0.8; line-height: 1.8;">
+                    <li><a href="#">Envíos y devoluciones</a></li>
+                    <li><a href="#">Métodos de pago</a></li>
+                    <li><a href="#">Aviso de privacidad</a></li>
+                    <li><a href="faq.html">Preguntas frecuentes</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 1rem;">Contacto</h4>
+                <p style="opacity: 0.8;">📩 hola@pinyu.mx</p>
+                <p style="opacity: 0.8;">🇲🇽 Hecho en México</p>
+            </div>
+        </div>
+        <div
+            style="text-align: center; margin-top: 3rem; opacity: 0.5; font-size: 0.9rem; border-top: 1px solid #555; padding-top: 2rem;">
+            &copy; 2026 Pinyu Store. Todos los derechos reservados.
+        </div>
+    </footer>
+
+</body>
+
+</html>
