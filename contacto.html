@@ -32,21 +32,21 @@
 
             <div
                 style="background: var(--white); padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); text-align: left;">
-                <form>
+                <form action="mailto:hola@pinyu.mx" method="post" enctype="text/plain">
                     <div style="margin-bottom: 1.5rem;">
                         <label style="display: block; margin-bottom: 0.5rem; font-weight: 700;">Nombre</label>
-                        <input type="text" class="form-input" placeholder="Tu nombre">
+                        <input type="text" name="nombre" class="form-input" placeholder="Tu nombre">
                     </div>
                     <div style="margin-bottom: 1.5rem;">
                         <label style="display: block; margin-bottom: 0.5rem; font-weight: 700;">Correo
                             electrónico</label>
-                        <input type="email" class="form-input" placeholder="tu@correo.com">
+                        <input type="email" name="email" class="form-input" placeholder="tu@correo.com">
                     </div>
                     <div style="margin-bottom: 1.5rem;">
                         <label style="display: block; margin-bottom: 0.5rem; font-weight: 700;">Mensaje</label>
-                        <textarea class="form-input" rows="5" placeholder="¿En qué podemos ayudarte?"></textarea>
+                        <textarea class="form-input" name="mensaje" rows="5" placeholder="¿En qué podemos ayudarte?"></textarea>
                     </div>
-                    <button type="button" class="btn btn-primary" style="width: 100%;">Enviar mensaje</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar mensaje</button>
                 </form>
             </div>
 
