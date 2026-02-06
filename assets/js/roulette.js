@@ -138,10 +138,14 @@ spinBtn.addEventListener('click', () => {
 
     const visualRotationNeeded = (360 - targetAngle) % 360;
 
-    // Add extra spins (min 5, max 10)
     const extraSpins = (5 + Math.floor(Math.random() * 5)) * 360;
 
-    const finalRotation = extraSpins + visualRotationNeeded;
+    // FIX: User reported "Stickers" (Index 4) visible when "15%" (Index 0) won.
+    // This implies a misalignment. 
+    // Applying -72deg offset to shift visual back to Index 0 from Index 4.
+    const alignmentOffset = -72;
+
+    const finalRotation = extraSpins + visualRotationNeeded + alignmentOffset;
 
     wheel.style.transform = `rotate(${finalRotation}deg)`;
 
