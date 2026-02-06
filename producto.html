@@ -6,21 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pin Kawaii de Capibara - Pinyu</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/roulette.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
     <!-- Navigation -->
-    <nav class="main-nav container">
-        <a href="index.html" class="nav-logo"><span>✨</span> Pinyu</a>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">Inicio</a>
-            <a href="tienda.html" class="nav-link active">Tienda</a>
-            <a href="sobre.html" class="nav-link">Sobre Pinyu</a>
-            <a href="contacto.html" class="nav-link">Contacto</a>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span>✨</span> Pinyu
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="tienda.html" class="nav-link active">Tienda</a>
+                <a href="sobre.html" class="nav-link">Sobre Pinyu</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </div>
+            <div class="cart-icon">
+                🛒 <span style="font-size: 0.8rem; vertical-align: top;">(0)</span>
+            </div>
         </div>
-        <div class="cart-icon">🛒 <span style="font-size: 0.8rem; vertical-align: top;">(0)</span></div>
     </nav>
 
     <!-- Product Detail -->
@@ -58,7 +66,8 @@
                 <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
                     <input type="number" value="1" min="1"
                         style="padding: 12px; width: 60px; border-radius: 12px; border: 1px solid #ddd; text-align: center;">
-                    <button class="btn btn-primary" style="flex-grow: 1;">Agregar al carrito</button>
+                    <button class="btn btn-primary" style="flex-grow: 1;" onclick="addToCart(140)">Agregar al
+                        carrito</button>
                 </div>
 
                 <p style="font-size: 0.9rem; color: #2ecc71;">● En Stock - Envío inmediato</p>
@@ -100,6 +109,8 @@
         </div>
     </footer>
 
+    <!-- Roulette & Cart Logic -->
+    <script src="assets/js/roulette.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Pinyu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/roulette.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="assets/js/roulette.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span>✨</span> Pinyu
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="tienda.html" class="nav-link">Tienda</a>
+                <a href="sobre.html" class="nav-link">Sobre Pinyu</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </div>
+            <div class="cart-icon">
+                🛒 <span style="font-size: 0.8rem; vertical-align: top;">(0)</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Context -->
+    <section class="container" style="padding: 4rem 20px; min-height: 60vh;">
+        <h1 class="section-title">Tu Carrito Kawaii 🛒</h1>
+
+        <div id="cart-content" style="max-width: 800px; margin: 0 auto;">
+            <!-- Cart Items Dynamic Injection (Mocked for now based on count) -->
+            <div class="cart-item"
+                style="display: flex; gap: 1rem; align-items: center; background: #fff; padding: 1rem; border-radius: 12px; margin-bottom: 1rem; border: 1px solid #f0f0f0;">
+                <div
+                    style="width: 80px; height: 80px; background: #f9f9f9; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                    📦</div>
+                <div style="flex-grow: 1;">
+                    <h3 style="margin-bottom: 0.5rem;">Pack de Pines Sorpresa</h3>
+                    <p style="color: var(--text-light);">Cantidad: <span id="item-count">0</span></p>
+                </div>
+                <div style="font-weight: bold; font-size: 1.2rem; color: var(--hot-pink);" id="item-total">$0.00</div>
+            </div>
+
+            <!-- Total -->
+            <div style="text-align: right; margin-top: 2rem; border-top: 2px solid #eee; padding-top: 1rem;">
+                <p style="font-size: 1.5rem;">Total: <strong style="color: var(--hot-pink);"
+                        id="cart-total-display">$0.00</strong></p>
+                <p style="font-size: 0.9rem; color: #777;">Envío calculado al finalizar compra</p>
+            </div>
+
+            <!-- Actions -->
+            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem; flex-wrap: wrap;">
+                <a href="tienda.html" class="btn btn-secondary">Seguir Comprando</a>
+
+                <!-- Mercado Pago Placeholder -->
+                <!-- Mercado Pago Integration -->
+                <button class="btn btn-primary" id="checkout-btn"
+                    style="background: #009EE3; color: white; display: flex; align-items: center; gap: 0.5rem;">
+                    Pagar con Mercado Pago 🤝
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--text-dark); color: white; padding: 4rem 0; margin-top: 4rem;">
+        <div class="container" style="text-align: center; opacity: 0.8;">
+            &copy; 2026 Pinyu Store.
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to update UI based on localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const total = parseFloat(localStorage.getItem('cartTotal')) || 0;
+            const count = parseInt(localStorage.getItem('cartItems')) || 0;
+
+            document.getElementById('item-count').innerText = count;
+            document.getElementById('item-total').innerText = `$${total.toFixed(2)}`;
+            document.getElementById('cart-total-display').innerText = `$${total.toFixed(2)}`;
+
+            if (count === 0) {
+                document.getElementById('cart-content').innerHTML = `
+                    <div style="text-align: center; padding: 3rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🍃</div>
+                        <p>Tu carrito está vacío.</p>
+                        <a href="tienda.html" class="btn btn-primary" style="margin-top: 1rem;">Ir a la Tienda</a>
+                    </div>
+                `;
+            } else {
+                // Initialize Payment Button
+                const checkoutBtn = document.getElementById('checkout-btn');
+                if (checkoutBtn) {
+                    checkoutBtn.addEventListener('click', async () => {
+                        checkoutBtn.innerText = "Procesando...";
+                        checkoutBtn.disabled = true;
+
+                        try {
+                            const response = await fetch('/api/pago', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    items: [
+                                        {
+                                            title: 'Pedido Pinyu',
+                                            quantity: 1,
+                                            unit_price: total
+                                        }
+                                    ]
+                                })
+                            });
+
+                            const data = await response.json();
+
+                            if (data.init_point) {
+                                window.location.href = data.init_point;
+                            } else {
+                                alert('Error al crear el pago. Revisa la consola.');
+                                console.error(data);
+                                checkoutBtn.innerText = "Reintentar Pago";
+                                checkoutBtn.disabled = false;
+                            }
+
+                        } catch (error) {
+                            console.error('Error:', error);
+                            alert('Ocurrió un error de conexión.');
+                            checkoutBtn.innerText = "Reintentar Pago";
+                            checkoutBtn.disabled = false;
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

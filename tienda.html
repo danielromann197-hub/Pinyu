@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Pinyu - Explora nuestros Pines</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/roulette.css">
 
     <!-- Google Fonts: Quicksand -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,7 +69,8 @@
                             <span style="font-size: 0.9rem; color: #2ecc71;">● En Stock</span>
                         </div>
                         <a href="producto.html" class="btn btn-primary btn-sm"
-                            style="width: 100%; margin-top: 1rem; text-align: center;">Ver detalles</a>
+                            style="width: 100%; margin-top: 1rem; text-align: center;"
+                            onclick="addToCart(140); return false;">Agregar ($140)</a>
                     </div>
                 </div>
 
@@ -80,7 +82,8 @@
                         <span class="price">$120.00</span>
                         <div><span style="font-size: 0.9rem; color: #2ecc71;">● En Stock</span></div>
                         <a href="producto.html" class="btn btn-primary btn-sm"
-                            style="width: 100%; margin-top: 1rem; text-align: center;">Ver detalles</a>
+                            style="width: 100%; margin-top: 1rem; text-align: center;"
+                            onclick="addToCart(120); return false;">Agregar ($120)</a>
                     </div>
                 </div>
 
@@ -91,7 +94,8 @@
                         <h3>Vara Mágica ✨</h3>
                         <span class="price">$150.00</span>
                         <div><span style="font-size: 0.9rem; color: #2ecc71;">● En Stock</span></div>
-                        <button class="btn btn-primary btn-sm" style="width: 100%; margin-top: 1rem;">Agregar al
+                        <button class="btn btn-primary btn-sm" style="width: 100%; margin-top: 1rem;"
+                            onclick="addToCart(150)">Agregar al
                             carrito</button>
                     </div>
                 </div>
@@ -116,7 +120,8 @@
                         <h3>Axolote Feliz 🌸</h3>
                         <span class="price">$140.00</span>
                         <div><span style="font-size: 0.9rem; color: #2ecc71;">● En Stock</span></div>
-                        <button class="btn btn-primary btn-sm" style="width: 100%; margin-top: 1rem;">Agregar al
+                        <button class="btn btn-primary btn-sm" style="width: 100%; margin-top: 1rem;"
+                            onclick="addToCart(140)">Agregar al
                             carrito</button>
                     </div>
                 </div>
@@ -159,6 +164,8 @@
         </div>
     </footer>
 
+    <!-- Roulette Resources -->
+    <script src="assets/js/roulette.js"></script>
 </body>
 
 </html>
