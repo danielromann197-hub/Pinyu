@@ -412,22 +412,20 @@ button {
         width: 90%;
     }
 
-    @media (max-width: 768px) {
-        .nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: #fff;
-            padding: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            display: none;
-            /* Hidden by default on mobile for now */
-        }
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        display: none;
+        /* Hidden by default on mobile for now */
     }
 
     /* --- Product Detail --- */

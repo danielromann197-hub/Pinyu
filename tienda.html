@@ -168,38 +168,7 @@
         </div>
     </footer>
 
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script>
-        const mp = new MercadoPago('APP_USR-e8002fb6-f2ea-4ce8-a1ec-7b7db24f5854');
-
-        async function buyProduct(title, price) {
-            try {
-                // BACKEND URL (Relative path for Hostinger Node App)
-                const response = await fetch('/create_preference', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        title: title,
-                        price: price,
-                        quantity: 1
-                    })
-                });
-                const preference = await response.json();
-                if (preference.id) {
-                    mp.checkout({
-                        preference: {
-                            id: preference.id
-                        }
-                    }).open();
-                }
-            } catch (error) {
-                console.error(error);
-                alert('Error: ' + error.message + '\n\nAsegúrate de que el servidor backend esté corriendo en http://localhost:3000');
-            }
-        }
-
         document.querySelectorAll('.btn-primary').forEach(button => {
             const text = button.textContent.replace(/\s+/g, ' ').trim();
             if (text.includes('Agregar al carrito')) {
@@ -207,11 +176,39 @@
                     const card = e.target.closest('.product-card');
                     const title = card.querySelector('h3').textContent;
                     const priceText = card.querySelector('.price').textContent;
-                    const price = parseFloat(priceText.replace('$', ''));
-                    document.querySelector('.cart-icon span').textContent = '(1)';
-                    buyProduct(title, price);
+                    const price = parseFloat(priceText.replace('$', '').replace(' MXN', ''));
+
+                    const product = {
+                        title: title,
+                        price: price,
+                        quantity: 1,
+                        image: card.querySelector('img').src
+                    };
+
+                    // Get existing cart or init empty array
+                    let cart = JSON.parse(localStorage.getItem('pinyuCart')) || [];
+
+                    // Add to cart
+                    cart.push(product);
+
+                    localStorage.setItem('pinyuCart', JSON.stringify(cart));
+
+                    // Update UI
+                    document.querySelector('.cart-icon span').textContent = `(${cart.length})`;
+
+                    // Optional: Visual feedback or redirect
+                    if (confirm('¡Producto agregado! ¿Ir al carrito o seguir comprando? \n\nAceptar: Ir al carrito\nCancelar: Seguir comprando')) {
+                        window.location.href = '/carrito';
+                    }
                 });
             }
+        });
+
+        // Init cart count on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('pinyuCart')) || [];
+            const countSpan = document.querySelector('.cart-icon span');
+            if (countSpan) countSpan.textContent = `(${cart.length})`;
         });
     </script>
 </body>

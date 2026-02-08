@@ -21,8 +21,49 @@ app.get('/producto', (req, res) => res.sendFile(path.join(__dirname, '../product
 app.get('/carrito', (req, res) => res.sendFile(path.join(__dirname, '../carrito.html')));
 app.get('/faq', (req, res) => res.sendFile(path.join(__dirname, '../faq.html')));
 
+app.get('/success', (req, res) => {
+    res.send(`
+        <html>
+            <head><link rel="stylesheet" href="/styles.css"></head>
+            <body style="text-align:center; padding:50px; font-family:'Quicksand', sans-serif;">
+                <h1 style="color:#FF69B4;">¡Pago Exitoso! 💖</h1>
+                <p>Gracias por tu compra. Te enviaremos un correo con los detalles.</p>
+                <a href="/" class="btn btn-primary">Volver al inicio</a>
+            </body>
+        </html>
+    `);
+});
+
+app.get('/failure', (req, res) => {
+    res.send(`
+        <html>
+            <head><link rel="stylesheet" href="/styles.css"></head>
+            <body style="text-align:center; padding:50px; font-family:'Quicksand', sans-serif;">
+                <h1 style="color:red;">El pago falló 😢</h1>
+                <p>Lo sentimos, hubo un problema con tu pago.</p>
+                <a href="/carrito" class="btn btn-primary">Intentar de nuevo</a>
+            </body>
+        </html>
+    `);
+});
+
+app.get('/pending', (req, res) => {
+    res.send(`
+        <html>
+            <head><link rel="stylesheet" href="/styles.css"></head>
+            <body style="text-align:center; padding:50px; font-family:'Quicksand', sans-serif;">
+                <h1 style="color:#FFC3D1;">Pago Pendiente ⏳</h1>
+                <p>Tu pago se está procesando.</p>
+                <a href="/" class="btn btn-primary">Volver al inicio</a>
+            </body>
+        </html>
+    `);
+});
+
 app.post("/create_preference", async (req, res) => {
     try {
+        const DOMAIN = process.env.DOMAIN || 'https://pinyu.art';
+
         const body = {
             items: [
                 {
@@ -32,11 +73,10 @@ app.post("/create_preference", async (req, res) => {
                     currency_id: "MXN",
                 },
             ],
-            // Replace with your actual domain in production
             back_urls: {
-                success: `${req.protocol}://${req.get('host')}/success`,
-                failure: `${req.protocol}://${req.get('host')}/failure`,
-                pending: `${req.protocol}://${req.get('host')}/pending`,
+                success: `${DOMAIN}/success`,
+                failure: `${DOMAIN}/failure`,
+                pending: `${DOMAIN}/pending`,
             },
             auto_return: "approved",
         };
