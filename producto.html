@@ -20,10 +20,9 @@
             <a href="/sobre" class="nav-link">Sobre Pinyu</a>
             <a href="/contacto" class="nav-link">Contacto</a>
         </div>
-        <div class="cart-icon" style="cursor: pointer;"
-            onclick="alert('Funcionalidad de carrito completo en desarrollo. Por ahora, la compra es directa.')">🛒
-            <span style="font-size: 0.8rem; vertical-align: top;">(0)</span>
-        </div>
+        <a href="/carrito" class="cart-icon" style="text-decoration: none;">
+            🛒 <span style="font-size: 0.8rem; vertical-align: top;">(0)</span>
+        </a>
     </nav>
 
     <!-- Product Detail -->
@@ -107,37 +106,32 @@
     <script>
         const mp = new MercadoPago('APP_USR-e8002fb6-f2ea-4ce8-a1ec-7b7db24f5854');
 
-        document.querySelector('.btn-primary').addEventListener('click', async () => {
+        document.querySelector('.btn-primary').addEventListener('click', () => {
             const title = document.querySelector('h1').textContent;
             const priceText = document.querySelector('.product-info-detail .price, .product-info-detail p[style*="font-weight: 700"]').textContent;
             const price = parseFloat(priceText.replace('$', '').replace(' MXN', ''));
-            const quantity = document.querySelector('input[type="number"]').value;
-            document.querySelector('.cart-icon span').textContent = `(${quantity})`;
-            try {
-                // BACKEND URL (Relative path for Hostinger Node App)
-                const response = await fetch('/create_preference', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        title: title,
-                        price: price,
-                        quantity: quantity
-                    })
-                });
-                const preference = await response.json();
-                if (preference.id) {
-                    mp.checkout({
-                        preference: {
-                            id: preference.id
-                        }
-                    }).open();
-                }
-            } catch (error) {
-                console.error(error);
-                alert('Error al procesar el pago. Asegúrate de que el servidor backend esté corriendo.');
-            }
+            const quantity = parseInt(document.querySelector('input[type="number"]').value);
+
+            const product = {
+                title: title,
+                price: price,
+                quantity: quantity,
+                image: document.querySelector('.main-image').src
+            };
+
+            // Get existing cart or init empty array
+            let cart = JSON.parse(localStorage.getItem('pinyuCart')) || [];
+
+            // simple check if item exists to update quantity (optional, or just push)
+            cart.push(product);
+
+            localStorage.setItem('pinyuCart', JSON.stringify(cart));
+
+            // Update UI
+            document.querySelector('.cart-icon span').textContent = `(${cart.length})`;
+
+            // Redirect to cart
+            window.location.href = '/carrito';
         });
     </script>
 </body>
