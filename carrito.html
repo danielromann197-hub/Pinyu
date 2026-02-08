@@ -96,7 +96,6 @@
                     </div>
                 `;
             } else {
-                // Initialize Payment Button
                 const checkoutBtn = document.getElementById('checkout-btn');
                 if (checkoutBtn) {
                     checkoutBtn.addEventListener('click', async () => {
@@ -104,19 +103,15 @@
                         checkoutBtn.disabled = true;
 
                         try {
-                            const response = await fetch('/api/pago', {
+                            const response = await fetch('/create_preference', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
                                 body: JSON.stringify({
-                                    items: [
-                                        {
-                                            title: 'Pedido Pinyu',
-                                            quantity: 1,
-                                            unit_price: total
-                                        }
-                                    ]
+                                    title: `Compra Pinyu (${count} items)`,
+                                    quantity: 1,
+                                    price: total
                                 })
                             });
 
@@ -125,16 +120,16 @@
                             if (data.init_point) {
                                 window.location.href = data.init_point;
                             } else {
-                                alert('Error al crear el pago. Revisa la consola.');
+                                alert('Error al procesar el pago. Intenta de nuevo.');
                                 console.error(data);
-                                checkoutBtn.innerText = "Reintentar Pago";
+                                checkoutBtn.innerText = "Pagar con Mercado Pago 🤝";
                                 checkoutBtn.disabled = false;
                             }
 
                         } catch (error) {
                             console.error('Error:', error);
-                            alert('Ocurrió un error de conexión.');
-                            checkoutBtn.innerText = "Reintentar Pago";
+                            alert('Ocurrió un error de conexión con el servidor.');
+                            checkoutBtn.innerText = "Pagar con Mercado Pago 🤝";
                             checkoutBtn.disabled = false;
                         }
                     });
