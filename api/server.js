@@ -12,6 +12,15 @@ app.use(express.static(path.join(__dirname, '../'))); // Serve static files from
 // Initialize Mercado Pago client
 const client = new MercadoPagoConfig({ accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN });
 
+// Page Routes (Clean URLs)
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
+app.get('/tienda', (req, res) => res.sendFile(path.join(__dirname, '../tienda.html')));
+app.get('/sobre', (req, res) => res.sendFile(path.join(__dirname, '../sobre.html')));
+app.get('/contacto', (req, res) => res.sendFile(path.join(__dirname, '../contacto.html')));
+app.get('/producto', (req, res) => res.sendFile(path.join(__dirname, '../producto.html')));
+app.get('/carrito', (req, res) => res.sendFile(path.join(__dirname, '../carrito.html')));
+app.get('/faq', (req, res) => res.sendFile(path.join(__dirname, '../faq.html')));
+
 app.post("/create_preference", async (req, res) => {
     try {
         const body = {
