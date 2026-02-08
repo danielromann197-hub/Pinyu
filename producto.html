@@ -114,7 +114,8 @@
             const quantity = document.querySelector('input[type="number"]').value;
             document.querySelector('.cart-icon span').textContent = `(${quantity})`;
             try {
-                const response = await fetch('/create_preference', {
+                // BACKEND URL (Hostinger -> Vercel)
+                const response = await fetch('https://dc-rfy0njpen-daniels-projects-6d245d7b.vercel.app/create_preference', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
