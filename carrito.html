@@ -80,8 +80,9 @@
     <script>
         // Simple script to update UI based on localStorage
         document.addEventListener('DOMContentLoaded', () => {
-            const total = parseFloat(localStorage.getItem('cartTotal')) || 0;
-            const count = parseInt(localStorage.getItem('cartItems')) || 0;
+            const cart = JSON.parse(localStorage.getItem('pinyuCart')) || [];
+            const count = cart.length;
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
             document.getElementById('item-count').innerText = count;
             document.getElementById('item-total').innerText = `$${total.toFixed(2)}`;
@@ -120,15 +121,15 @@
                             if (data.init_point) {
                                 window.location.href = data.init_point;
                             } else {
-                                alert('Error al procesar el pago. Intenta de nuevo.');
-                                console.error(data);
+                                console.error('Server Error:', data);
+                                alert(`Error al procesar el pago: ${data.details || 'Error desconocido'}`);
                                 checkoutBtn.innerText = "Pagar con Mercado Pago 🤝";
                                 checkoutBtn.disabled = false;
                             }
 
                         } catch (error) {
-                            console.error('Error:', error);
-                            alert('Ocurrió un error de conexión con el servidor.');
+                            console.error('Network Error:', error);
+                            alert(`Ocurrió un error de conexión: ${error.message}`);
                             checkoutBtn.innerText = "Pagar con Mercado Pago 🤝";
                             checkoutBtn.disabled = false;
                         }
