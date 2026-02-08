@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node api/server.js",
     "dev": "vite",
-    "build": "vite build",
     "preview": "vite preview"
   },
   "keywords": [],
