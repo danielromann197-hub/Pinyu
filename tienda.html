@@ -175,8 +175,8 @@
 
         async function buyProduct(title, price) {
             try {
-                // BACKEND URL (Hostinger -> Vercel)
-                const response = await fetch('https://dc-rfy0njpen-daniels-projects-6d245d7b.vercel.app/create_preference', {
+                // BACKEND URL (Relative path for Hostinger Node App)
+                const response = await fetch('/create_preference', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
