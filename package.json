@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "pinyu-main",
   "version": "1.0.0",
   "description": "",
@@ -21,3 +22,24 @@
     "vercel": "^50.13.2"
   }
 }
+=======
+    "name": "pinyu-store",
+    "version": "1.0.0",
+    "description": "Tienda Kawaii Pinyu",
+    "main": "index.html",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "mercadopago": "^2.0.0"
+    },
+    "devDependencies": {
+        "vite": "^5.0.0"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
+>>>>>>> 3f2e6b6123df448f1d5bd720d4efe6a7877c7eef
