@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Pinyu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/roulette.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="module" src="assets/js/roulette.js" defer></script>
+    <script type="module" src="assets/js/cart.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <span>✨</span> Pinyu
+            </a>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Inicio</a>
+                <a href="/tienda" class="nav-link">Tienda</a>
+                <a href="/sobre" class="nav-link">Sobre Pinyu</a>
+                <a href="/contacto" class="nav-link">Contacto</a>
+            </div>
+            <a href="/carrito" class="cart-icon" style="text-decoration: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span class="cart-count" style="font-size: 0.9rem; font-weight: bold; margin-left: 5px;">(0)</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section class="container cart-container">
+        <h1 class="section-title">Tu Carrito Kawaii 🛒</h1>
+
+        <div class="cart-layout">
+            <!-- Items Area -->
+            <div id="cart-content-dynamic">
+                <!-- Items will be injected here by cart.js -->
+                <div style="text-align: center; padding: 2rem; color: #aaa;">Cargando...</div>
+            </div>
+
+            <!-- Summary Area -->
+            <div id="checkout-section" style="display: none;">
+                <div class="cart-summary">
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span class="cart-total-value">$0.00</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: #777; margin-bottom: 2rem;">El costo de envío se calculará en el
+                        siguiente paso.</p>
+
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <button class="btn btn-primary" id="checkout-btn"
+                            style="width: 100%; background: #009EE3; justify-content: center; display: flex; align-items: center; gap: 0.5rem;">
+                            Pagar con Mercado Pago 🤝
+                        </button>
+                        <a href="/tienda" class="btn btn-secondary" style="width: 100%; text-align: center;">Seguir
+                            Comprando</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--text-dark); color: white; padding: 4rem 0; margin-top: 4rem;">
+        <div class="container" style="text-align: center; opacity: 0.8;">
+            &copy; 2026 Pinyu Store.
+        </div>
+    </footer>
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script>
+        // Mercado Pago Logic Reuse for Checkout
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkoutBtn = document.getElementById('checkout-btn');
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', async () => {
+                    const cart = JSON.parse(localStorage.getItem('pinyuCart')) || [];
+                    if (cart.length === 0) return;
+
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    const count = cart.reduce((c, i) => c + i.quantity, 0);
+
+                    checkoutBtn.innerText = "Procesando...";
+                    checkoutBtn.disabled = true;
+
+                    try {
+                        const response = await fetch('/create_preference', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                title: `Compra Pinyu (${count} items)`,
+                                quantity: 1,
+                                price: total
+                            })
+                        });
+
+                        const data = await response.json();
+
+                        if (data.init_point) {
+                            window.location.href = data.init_point;
+                        } else {
+                            console.error('Server Error:', data);
+                            alert(`Error al procesar el pago: ${data.details || 'Error desconocido'}`);
+                            checkoutBtn.innerText = "Pagar con Mercado Pago 🤝";
+                            checkoutBtn.disabled = false;
+                        }
+
+                    } catch (error) {
+                        console.error('Network Error:', error);
+                        alert(`Ocurrió un error de conexión: ${error.message}`);
+                        checkoutBtn.innerText = "Pagar con Mercado Pago 🤝";
+                        checkoutBtn.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

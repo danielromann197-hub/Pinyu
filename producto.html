@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Kawaii de Capibara - Pinyu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="main-nav container">
+        <a href="/" class="nav-logo"><span>✨</span> Pinyu</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Inicio</a>
+            <a href="/tienda" class="nav-link active">Tienda</a>
+            <a href="/sobre" class="nav-link">Sobre Pinyu</a>
+            <a href="/contacto" class="nav-link">Contacto</a>
+        </div>
+        <a href="/carrito" class="cart-icon" style="text-decoration: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="cart-count" style="font-size: 0.9rem; font-weight: bold; margin-left: 5px;">(0)</span>
+        </a>
+    </nav>
+
+    <!-- Product Detail -->
+    <section class="container" style="padding: 4rem 20px;">
+        <div class="product-detail-grid">
+            <!-- Gallery -->
+            <div class="gallery">
+                <img src="assets/pin-capybara.png" alt="Pin Capibara" class="main-image">
+                <div class="thumbnails">
+                    <img src="assets/pin-capybara.png" class="thumb active">
+                    <!-- Placeholder placeholders for other angles -->
+                    <div class="thumb" style="background:#f0f0f0;"></div>
+                    <div class="thumb" style="background:#f0f0f0;"></div>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="product-info-detail">
+                <span style="color: var(--text-light); font-size: 0.9rem;">SKU: PIN-CAPI-01</span>
+                <h1 style="font-size: 2.5rem; margin: 0.5rem 0; color: var(--hot-pink);">Pin Kawaii de Capibara 🐹</h1>
+                <p style="font-size: 1.5rem; font-weight: 700; color: var(--text-dark);">$140.00 MXN</p>
+
+                <div style="margin: 2rem 0; font-size: 1.1rem; line-height: 1.6;">
+                    <p>¿Amas lo tierno y relajado? Este pin kawaii de capibara es perfecto para ti.</p>
+                    <p>Cada diseño tiene expresiones adorables y viene con una cubierta de plástico protectora que
+                        puedes retirar al usarlo.</p>
+                    <ul style="margin-top: 1rem; list-style: none;">
+                        <li>✨ Tamaño: 3 cm aprox.</li>
+                        <li>✨ Material: Esmalte metálico</li>
+                        <li>✨ Envío aleatorio entre diseños disponibles</li>
+                        <li>📦 Envíos a todo México</li>
+                    </ul>
+                </div>
+
+                <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
+                    <input type="number" value="1" min="1"
+                        style="padding: 12px; width: 60px; border-radius: 12px; border: 1px solid #ddd; text-align: center;">
+                    <button class="btn btn-primary" style="flex-grow: 1;">Agregar al carrito</button>
+                </div>
+
+                <p style="font-size: 0.9rem; color: #2ecc71;">● En Stock - Envío inmediato</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--text-dark); color: white; padding: 4rem 0; margin-top: 4rem;">
+        <div class="container"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: left;">
+            <div>
+                <h3 style="color: var(--primary-pink); margin-bottom: 1rem;">Pinyu 💖</h3>
+                <p>Tu estilo, tu mood, un pin a la vez.</p>
+                <div style="margin-top: 1rem; font-size: 1.5rem;">
+                    <a href="#" style="margin-right: 10px;">📸</a>
+                    <a href="#" style="margin-right: 10px;">🎵</a>
+                    <a href="#">💬</a>
+                </div>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 1rem;">Políticas</h4>
+                <ul style="list-style: none; opacity: 0.8; line-height: 1.8;">
+                    <li><a href="#">Envíos y devoluciones</a></li>
+                    <li><a href="#">Métodos de pago</a></li>
+                    <li><a href="#">Aviso de privacidad</a></li>
+                    <li><a href="/faq">Preguntas frecuentes</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: white; margin-bottom: 1rem;">Contacto</h4>
+                <p style="opacity: 0.8;">📩 hola@pinyu.mx</p>
+                <p style="opacity: 0.8;">🇲🇽 Hecho en México</p>
+            </div>
+        </div>
+        <div
+            style="text-align: center; margin-top: 3rem; opacity: 0.5; font-size: 0.9rem; border-top: 1px solid #555; padding-top: 2rem;">
+            &copy; 2026 Pinyu Store. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script type="module">
+        import { addToCart } from './assets/js/cart.js';
+        const mp = new MercadoPago('APP_USR-e8002fb6-f2ea-4ce8-a1ec-7b7db24f5854');
+
+        document.querySelector('.btn-primary').addEventListener('click', () => {
+            const title = document.querySelector('h1').textContent;
+            const priceText = document.querySelector('.product-info-detail .price, .product-info-detail p[style*="font-weight: 700"]').textContent;
+            const price = parseFloat(priceText.replace('$', '').replace(' MXN', ''));
+            const quantity = parseInt(document.querySelector('input[type="number"]').value);
+            const image = document.querySelector('.main-image').src;
+
+            addToCart({
+                title,
+                price,
+                quantity,
+                image
+            });
+        });
+    </script>
+</body>
+
+</html>

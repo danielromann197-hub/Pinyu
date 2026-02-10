@@ -1,0 +1,7 @@
+#ignore
+node_modules
+.env
+.vercel
+dist
+.DS_Store
+.env*.local
