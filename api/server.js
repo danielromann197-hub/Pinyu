@@ -62,7 +62,17 @@ app.get('/pending', (req, res) => {
 
 app.post("/create_preference", async (req, res) => {
     try {
+        const dotenvResult = require("dotenv").config({ path: path.join(__dirname, '../.env') });
+        if (dotenvResult.error) {
+            console.warn("Dotenv error:", dotenvResult.error);
+        }
+
         const DOMAIN = process.env.DOMAIN || 'https://pinyu.art';
+        console.log("Using DOMAIN:", DOMAIN);
+
+        if (!DOMAIN || DOMAIN.includes("localhost") && !DOMAIN.startsWith("http")) {
+            console.warn("Warning: DOMAIN might be invalid for production:", DOMAIN);
+        }
 
         const body = {
             items: [
